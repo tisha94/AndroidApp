@@ -9,12 +9,14 @@ import java.net.Socket;
  * Created by Tisha868 on 5/11/16.
  */
 public class AppClient {
+
     public String sendMessage(String sentMessage) {
 
         try {
 
-            Socket clientSocket = new Socket("tisha",8005);
-            String tisha = "172.168.4.6";  // <-- stores IP Address into persons name
+            String tisha = "172.168.4.6";
+            Socket clientSocket = new Socket(tisha ,8005);
+            // <-- stores IP Address into persons name
             // "localhost" = connects to self
             // changed the clientSocket to connect to the server computer's IP address instead of "localhost".
 
@@ -32,11 +34,12 @@ public class AppClient {
                 // read what the server returns
                 serverResponse = in.readLine(); // input 4rm server
 
-                if (serverResponse.equals("end-transmission")){
+                if (serverResponse != null && serverResponse.equalsIgnoreCase("end-transmission")){
                     break;
                 }
 
-                System.out.println(serverResponse);
+                System.out.println("Server~~" + serverResponse);
+                return serverResponse;
             }
 
         }catch (Exception exception){

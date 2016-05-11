@@ -17,10 +17,12 @@ public class TishaActivity extends AppCompatActivity implements View.OnClickList
          EditText text;
          Button addButton;
 
-         ArrayAdapter<String> items; // a way to keep track of things when u add things to the list view by google.
+        AppClient client = new AppClient();
+
+         ArrayAdapter<String> storedMessages; // a way to keep track of things when u add things to the list view by google.
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) { // will intionlize my view(phone)
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_tisha);
 
@@ -28,10 +30,10 @@ public class TishaActivity extends AppCompatActivity implements View.OnClickList
             text = (EditText) findViewById(R.id.editText);
             addButton = (Button) findViewById(R.id.button);
 
-            items = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1); // array list of strings, thats tie to *this*. alist of items
-            list.setAdapter(items); //for this list i want to setAdapter for this list. type of list u want to keep track of.
+            storedMessages = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1); // array list of strings, thats tie to *this*. alist of storedMessages
+            list.setAdapter(storedMessages); //for this list i want to setAdapter for this list. type of list u want to keep track of.
 
-            items.add("Welcome ^.^"); //adding hardcoded item to the list
+            storedMessages.add("Welcome ^.^"); //adding hardcoded item to the list
 
             addButton.setOnClickListener(this); //my current object = *this* = an instance of itself.
             list.setOnItemLongClickListener(this);
@@ -42,17 +44,20 @@ public class TishaActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         public void onClick(View v) { // created an onClick Event handler.
-            String item = text.getText().toString(); //getting value of text the text field.
-            items.add(item); // adding whatever is in that text field to the List
+            String incomingMessage = text.getText().toString(); //getting value of text the text field.
+            String returnedMessage = client.sendMessage(incomingMessage); // sending message ot server.
+            storedMessages.add(returnedMessage); // adding whatever is in that text field to the List
             text.setText(""); // clearing that field for another text input
+
         }
 
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            String item = items.getItem(position); // get current item i selected
-            items.remove(item); // then remove it
+            String item = storedMessages.getItem(position); // get current item i selected
+            storedMessages.remove(item); // then remove it
             return true;
         }
+
 
 
 }

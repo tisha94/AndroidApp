@@ -13,32 +13,34 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:background="@color/accent_material_dark">
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="321dp"
+            android:layout_height="218dp"
             android:id="@+id/listView"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.17" />
+            android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.55"></LinearLayout>
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_weight="1" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send -->"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="&lt;-- Send "
+                android:id="@+id/button"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
